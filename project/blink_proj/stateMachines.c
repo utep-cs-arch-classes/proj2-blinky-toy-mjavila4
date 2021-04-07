@@ -30,7 +30,7 @@ char greenToggle(){
 
 void state_advance(){
 
-  static char state = 0;
+  static char state = 1;
 
   redToggle();
   
@@ -38,8 +38,10 @@ void state_advance(){
     case 0:
       greenToggle();
       state = 1;
+      break;
     case 1:
       state = 0;
+      break;
   }
 
   led_changed = 1;
