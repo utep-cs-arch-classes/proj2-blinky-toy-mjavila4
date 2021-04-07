@@ -4,6 +4,7 @@
 
 static char redOn = 0;
 static char greenOn = 0;
+static char stateCycle = 0;
 
 char redToggle(){
   static char state = 0;
@@ -35,6 +36,7 @@ char greenToggle(){
 
 void state_advance(){
   static char state = 1;
+  static char counter = 1;
 
   redToggle();
   
@@ -47,13 +49,58 @@ void state_advance(){
       state = 0;
       break;
   }
-
+  
+  if(counter++ == 3){
+    counter = 0;
+    if(stateCycle++ == 3){
+      stateCycle = 0;
+    }
+  }
+  
   led_changed = 1;
   led_update();
 
 } 
 
+void dimState(){
+  static state = 0;
+  switch(stateCycle){
+    case 0:
+      if(state++ == 3){  
+        if(redOn){red_on = 1;}
+        if(greenOn){green_on = 1;}
+        state = 0;
+      }else{
+        if(redOn){red_on = 0;}
+        if(greenOn){green_on = 0;}
+      }
+      break;
+    case 1:
+      if(state++ == 1){  
+        if(redOn){red_on = 1;}
+        if(greenOn){green_on = 1;}
+        state = 0;
+      }else{
+        if(redOn){red_on = 0;}
+        if(greenOn){green_on = 0;}
+      }
+      break;
+    case 2:
+      if(state++ == 3){  
+        if(redOn){red_on = 0;}
+        if(greenOn){green_on = 0;}
+        state = 0;
+      }else{
+        if(redOn){red_on = 1;}
+        if(greenOn){green_on = 1;}
+      }
+      break;
+  }
+  
+  led_changed = 1;
+  led_update();
 
+}
 
 
 
