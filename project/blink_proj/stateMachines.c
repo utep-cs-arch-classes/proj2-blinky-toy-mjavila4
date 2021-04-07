@@ -4,7 +4,6 @@
 
 static char redOn = 0;
 static char greenOn = 0;
-static char cycle = 0;
 
 char redToggle(){
   static char state = 0;
@@ -35,9 +34,7 @@ char greenToggle(){
 }
 
 void state_advance(){
-
   static char state = 1;
-  static char counter = 1;
 
   redToggle();
   
@@ -48,45 +45,13 @@ void state_advance(){
       break;
     case 1:
       state = 0;
-      dimState++;
       break;
-  }
-
-  if(counter++ == 3){
-    counter = 0;
-    if(cycle++ == 3){
-      cycle = 0;
-    }
   }
 
   led_changed = 1;
   led_update();
 
 } 
-
-void dimmingState(){
-
-  
-
-}
-
-void dim(char dimState){
-
-  
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
