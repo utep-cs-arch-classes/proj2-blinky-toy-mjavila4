@@ -2,6 +2,6 @@
 #define stateMachine_included
 
 void state_advance();
-void dim();
+void dimming();
 
 #endif // included

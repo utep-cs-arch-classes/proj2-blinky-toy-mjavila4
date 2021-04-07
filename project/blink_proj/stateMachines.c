@@ -2,79 +2,60 @@
 #include "stateMachines.h"
 #include "led.h"
 
-static char toggleRedState = 0;
+static char dimState = 0;
 
-char toggleRed(){
+char redToggle(){
 
-  switch(toggleRedState) {
-  case 0:
+  static char state = 0;
+
+  if(state == 0){
+
     red_on = 1;
-    toggleRedState = 1;
-    break;
-  case 1:
+    state = 1;
+
+  }else{
+
     red_on = 0;
-    toggleRedState = 0;
-    break;
-  }
-  return 1;
-}
-
-char toggleGreen(){
-
-  static char state = 1;
-
-  switch(state){
-  case 0:
-    green_on = 1;
     state = 0;
-    break;
-  case 1:
-    green_on = 1;
-    state = 0;
-    break;
-  }
-  return 1;
-}
 
+  }
+
+  return 1;
+
+}
 
 void state_advance(){
 
   static char state = 0;
-  static char dimState = 0;
+
   
-  if(dimState >= 150){
-  
-    green_on = 1;
-    
-  }
-  
-  while(++dimState < 150){
-  
-  switch(state){
-  case 0:
-    green_on = 1;
-    state = 1;
-    break;
-  case 1:
-    green_on = 0;
-    state = 0;
-    break;
-  }
-  
-  }
-  
-  if(dimState == 250){
-  
-    dimState = 0;
-  
-  }
-  
+
   led_changed = 1;
   led_update();
 
 } 
 
+void dimming(){
 
+  static char state = 0;
+  
+  if(dimState){
+
+    green_on = 0; 
+    
+    if(state++ == 1){
+
+      green_on = 1;
+      state = 0;
+
+    }
+
+    led_changed = 1;
+    led_update();
+    
+  }
+
+}
 
 
 
