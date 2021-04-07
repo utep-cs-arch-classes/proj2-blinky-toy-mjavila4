@@ -40,7 +40,16 @@ char toggleGreen(){
 void state_advance(){
 
   static char state = 0;
-
+  static char dimState = 0;
+  
+  if(dimState >= 150){
+  
+    green_on = 1;
+    
+  }
+  
+  while(++dimState < 150){
+  
   switch(state){
   case 0:
     green_on = 1;
@@ -51,10 +60,18 @@ void state_advance(){
     state = 0;
     break;
   }
-
+  
+  }
+  
+  if(dimState == 250){
+  
+    dimState = 0;
+  
+  }
+  
   led_changed = 1;
   led_update();
-  
+
 } 
 
 
