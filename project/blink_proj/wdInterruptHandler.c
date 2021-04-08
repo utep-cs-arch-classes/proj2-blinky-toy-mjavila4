@@ -11,7 +11,7 @@ __interrupt_vec(WDT_VECTOR) WDT(){	/* 250 interrupts/sec */
     blink_count = 0;
   }
   
-  if(++dim_count == 2){
+  if(++dim_count == 1){
     dimState();
     dim_count = 0;
   }
