@@ -2,12 +2,12 @@
 #include "stateMachines.h"
 #include "led.h"
 
-static char redOn = 0;      //Keeps track of light toggle within binary count
+static char redOn = 0;        //Keeps track of light toggle within binary count
 static char greenOn = 0;
-static char stateCycle = 0; /*Allows dimState() to increase brightness after
+static char stateCycle = 0;   /*Allows dimState() to increase brightness after
                               every finished binary count*/
 
-char redToggle(){           //Toggle red light
+char redToggle(){             //Toggle red light
   static char state = 0;
   if(state == 0){
     red_on = 1;
@@ -21,7 +21,7 @@ char redToggle(){           //Toggle red light
   return 1;
 }
 
-char greenToggle(){        //Toggle green light 
+char greenToggle(){          //Toggle green light 
   static char state = 0;
   if(state == 0){
     green_on = 1;
@@ -35,13 +35,13 @@ char greenToggle(){        //Toggle green light
   return 1;
 }
 
-void state_advance(){      //2-bit binary count
+void state_advance(){       //2-bit binary count
   static char state = 1;
   static char counter = 0;
 
-  redToggle();             //Always toggle red in each count state
+  redToggle();              //Always toggle red in each count state
   
-  switch(state){           //Toggles green every two state transitions
+  switch(state){            //Toggles green every two state transitions
     case 0:
       greenToggle();
       state = 1;
@@ -51,7 +51,7 @@ void state_advance(){      //2-bit binary count
       break;
   }
   
-  if(counter++ == 3){      //Increment stateCycle after one full binary count
+  if(counter++ == 3){       //Increment stateCycle after one full binary count
     counter = 0;
     if(stateCycle++ == 3){
       stateCycle = 0;
@@ -63,10 +63,10 @@ void state_advance(){      //2-bit binary count
 
 } 
 
-void dimState(){           //Brightens leds after every binary count
+void dimState(){            //Brightens leds after every binary count
   static char state = 0;  
   switch(stateCycle){
-    case 0:                //%25 led brightness
+    case 0:                 //%25 led brightness
       if(state++ == 3){  
         if(redOn){red_on = 1;}
         if(greenOn){green_on = 1;}
@@ -76,7 +76,7 @@ void dimState(){           //Brightens leds after every binary count
         if(greenOn){green_on = 0;}
       }
       break;
-    case 1:                //%50 led brightness
+    case 1:                 //%50 led brightness
       if(state++ == 1){  
         if(redOn){red_on = 1;}
         if(greenOn){green_on = 1;}
@@ -86,7 +86,7 @@ void dimState(){           //Brightens leds after every binary count
         if(greenOn){green_on = 0;}
       }
       break;
-  case 2:                  //%75 led brightness
+  case 2:                    //%75 led brightness
       if(state++ == 3){  
         if(redOn){red_on = 0;}
         if(greenOn){green_on = 0;}
