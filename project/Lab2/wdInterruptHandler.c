@@ -18,10 +18,10 @@ __interrupt_vecTime(WDT_VECTOR) WDT(){	/* 250 interrupts/sec */
   
 }
 
-void
+/*void
 __interrupt_vecSwitch(PORT1_VECTOR) Port_1(){
   if (P1IFG & SWITCHES) {	      /* did a button cause this interrupt? */
     P1IFG &= ~SWITCHES;		      /* clear pending sw interrupts */
     switch_interrupt_handler();	/* single handler for all switches */
   }
-}
+}*/
