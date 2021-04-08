@@ -2,7 +2,7 @@
 #include "switches.h"
 #include "led.h"
 
-char switch_state_down, switch_state_changed; /* effectively boolean */
+char switch_state_down1, switch_state_down2, switch_state_down3, switch_state_down4, switch_state_changed;
 
 static char 
 switch_update_interrupt_sense()
