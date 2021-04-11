@@ -5,10 +5,10 @@
 
 void stateAdvance(){
 
-  redOn = 0;
+  redOn = 1;
   greenOn = 1;
 
   ledChanged = 1;
   ledUpdate();
-
+  
 }

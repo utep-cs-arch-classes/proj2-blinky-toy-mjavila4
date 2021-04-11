@@ -1,29 +1,30 @@
 #include <msp430.h>
 #include "led.h"
-
-unsigned char redOn = 0, greenOn = 0;
-unsigned char ledChanged = 0;
-
-static char redVal[] = {0, LED_RED}, greenVal[] = {0, LED_GREEN};
+#include "switches.h"
+#include "stateMachines.h"
 
 void ledInit(){
 
   P1DIR |= LEDS;
-  ledChanged = 1;
+  switchStateChanged = 1;
   ledUpdate();
 
 }
 
 void ledUpdate(){
 
-  if(ledChanged){
+  if(switchStateChanged){
 
-    char ledFlags = redVal[redOn] | greenVal[greenOn];
+    char ledFlags = 0;
+    
+    ledFlags |= switchStateDown ? LED_GREEN : 0;
+    ledFlags |= switchStateDown ? 0 : LED_RED;
 
-    P1OUT &= (0xff^LEDS) | ledFlags;
+    P1OUT &= (0xff - LEDS) | ledFlags;
     P1OUT |= ledFlags;
-    ledChanged = 0;
 
   }
+
+  switchStateChanged = 0;
 
 }

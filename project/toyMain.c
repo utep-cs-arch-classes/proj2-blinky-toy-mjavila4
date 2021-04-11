@@ -6,10 +6,10 @@
 void main(void){
 
   configureClocks();
-  ledInit();
   switchInit();
-
-  enableWDTInterrupts();
+  switchInit();
+  
+  //enableWDTInterrupts();
 
   or_sr(0x18);
 
