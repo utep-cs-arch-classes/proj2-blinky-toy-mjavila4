@@ -1,3 +1,4 @@
+# makfile configuration
 COMMON_OBJECTS 	=
 CPU		= msp430g2553
 CFLAGS		= -mmcu=${CPU} -I../h
@@ -8,11 +9,11 @@ AS		= msp430-elf-as
 
 all: toy.elf
 
-toy.elf: ${COMMON_OBJECTS} inturruptHandler.o led.o switches.o toyMain.o stateMachines.o ../lib/libTimer.a
+toy.elf: ${COMMON_OBJECTS} interruptHandler.o led.o switches.o toyMain.o stateMachines.o ../lib/libTimer.a
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
 
-load: button.elf
-	msp430loader.sh button.elf
+load: toy.elf
+	msp430loader.sh toy.elf
 
 clean:
 	rm -f *.o *.elf
