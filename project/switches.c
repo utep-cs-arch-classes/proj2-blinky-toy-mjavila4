@@ -40,18 +40,18 @@ void switchInterruptHandler(){
   
   if(switch1StateDown){
     dimPer = 0;
-    buzzer_set_period(250);
+    buzzer_set_period(1000);
   }
   if(switch2StateDown){
     dimPer = 1;
-    buzzer_set_period(500);
+    buzzer_set_period(750);
   }
   if(switch3StateDown){
     dimPer = 2;
-    buzzer_set_period(750);
+    buzzer_set_period(500);
   }
   if(switch4StateDown){
     dimPer = 3;
-    buzzer_set_period(1000);
+    buzzer_set_period(250);
   }
 }

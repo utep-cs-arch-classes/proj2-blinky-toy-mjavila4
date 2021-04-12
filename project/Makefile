@@ -9,7 +9,7 @@ AS		= msp430-elf-as
 
 all: toy.elf
 
-toy.elf: ${COMMON_OBJECTS} interruptHandler.o dimmer.o led.o switches.o toyMain.o stateMachines.o ../lib/libTimer.a
+toy.elf: ${COMMON_OBJECTS} interruptHandler.o buzzer.o dimmer.o led.o switches.o toyMain.o stateMachines.o ../lib/libTimer.a
 	${CC} ${CFLAGS} ${LDFLAGS} -o $@ $^
 
 load: toy.elf

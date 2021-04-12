@@ -8,6 +8,8 @@ void buzzer_init(){
     P2SEL &= ~BIT7; 
     P2SEL |= BIT6;
     P2DIR = BIT6;
+
+    buzzer_set_period(1000);
 }
 
 void buzzer_set_period(short cycles){
