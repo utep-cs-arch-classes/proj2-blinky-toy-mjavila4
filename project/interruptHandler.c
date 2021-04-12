@@ -6,7 +6,6 @@
 void __interrupt_vec(WDT_VECTOR) WDT(){
 
   static char blinkCount = 0;
-  static char dimCount = 0;
 
   if(++blinkCount == 125){
 

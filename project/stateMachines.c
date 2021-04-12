@@ -23,15 +23,11 @@ void greenToggle(){
   static char state = 0;
 
   if(state == 0){
-
     dimGreen = 1;
     state = 1;
-
   }else{
-
     dimGreen = 0;
     state = 0;
-
   }
 
 }

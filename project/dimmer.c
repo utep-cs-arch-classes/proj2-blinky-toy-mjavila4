@@ -66,16 +66,3 @@ void greenBlink(){
     greenOn = 0;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
