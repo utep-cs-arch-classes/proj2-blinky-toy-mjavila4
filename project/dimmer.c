@@ -4,25 +4,10 @@
 #include "dimmer.h"
 #include "stateMachines.h"
 
-unsigned char dimRed, dimGreen;
+unsigned char dimRed, dimGreen, maxCount, highOut, lowOut;
 unsigned char dimPer;
 
 void stateDim(){
-
-  redBlink();
-  greenBlink();
-
-  ledChanged = 1;
-  ledUpdate();
-
-}
-
-void redBlink(){
-  static char state = 0;
-  static char maxCount;
-  static char highOut;
-  static char lowOut;
-  
   switch(dimPer){
     case 0:
       maxCount = 3;
@@ -46,6 +31,16 @@ void redBlink(){
       break;
   }
   
+  redBlink();
+  greenBlink();
+
+  ledChanged = 1;
+  ledUpdate();
+
+}
+
+void redBlink(){
+  static char state = 0; 
   if(dimRed){
     if(state++ == maxCount){
       redOn = highOut;
@@ -61,11 +56,11 @@ void redBlink(){
 void greenBlink(){
   static char state = 0;
   if(dimGreen){
-    if(state++ == 3){
-      greenOn = 1;
+    if(state++ == maxCount){
+      greenOn = highOut;
       state = 0;
     }else{
-      greenOn = 0;
+      greenOn = lowOut;
     }
   }else{
     greenOn = 0;
