@@ -5,6 +5,7 @@
 #include "stateMachines.h"
 
 unsigned char dimRed, dimGreen;
+unsigned char dimPer;
 
 void stateDim(){
 
@@ -18,12 +19,39 @@ void stateDim(){
 
 void redBlink(){
   static char state = 0;
+  static char maxCount;
+  static char highOut;
+  static char lowOut;
+  
+  switch(dimPer){
+    case 0:
+      maxCount = 3;
+      highOut = 1;
+      lowOut = 0;
+      break;
+    case 1:
+      maxCount = 1;
+      highOut = 1;
+      lowOut = 0;
+      break;
+    case 2:
+      maxCount = 3;
+      highOut = 0;
+      lowOut = 1;
+      break;
+    case 3:
+      maxCount = 0;
+      highOut = 1;
+      lowOut = 1;
+      break;
+  }
+  
   if(dimRed){
-    if(state++ == 3){
-      redOn = 1;
+    if(state++ == maxCount){
+      redOn = highOut;
       state = 0;
     }else{
-      redOn = 0;
+      redOn = lowOut;
     }
   }else{
     redOn = 0;
