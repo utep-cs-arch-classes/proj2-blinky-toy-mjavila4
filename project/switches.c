@@ -2,6 +2,7 @@
 #include "switches.h"
 #include "led.h"
 #include "stateMachines.h"
+#include "dimmer.h"
 
 char switch1StateDown, switch2StateDown, switch3StateDown, switch4StateDown;
 char switchStateChanged;
@@ -35,6 +36,11 @@ void switchInterruptHandler(){
   switch3StateDown = (p2Val & SW3) ? 0 : 1;
   switch4StateDown = (p2Val & SW4) ? 0 : 1;
   switchStateChanged = 1;
-  //ledUpdate();
+  
+  if(switch1StateDown){dimPer = 0;}
+  if(switch2StateDown){dimPer = 1;}
+  if(switch3StateDown){dimPer = 2;}
+  if(switch4StateDown){dimPer = 3;}
+  
   
 }
