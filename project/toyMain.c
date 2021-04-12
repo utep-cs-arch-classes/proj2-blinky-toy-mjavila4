@@ -2,14 +2,15 @@
 #include "libTimer.h"
 #include "led.h"
 #include "switches.h"
+#include "dimmer.h"
 
 void main(void){
 
   configureClocks();
   switchInit();
-  switchInit();
+  ledInit();
   
-  //enableWDTInterrupts();
+  enableWDTInterrupts();
 
   or_sr(0x18);
 

@@ -1,19 +1,23 @@
 #include <msp430.h>
 #include "stateMachines.h"
 #include "switches.h"
+#include "dimmer.h"
 
-/*void __interrupt_vec(WDT_VECTOR) WDT(){
+void __interrupt_vec(WDT_VECTOR) WDT(){
 
   static char blinkCount = 0;
+  static char dimCount = 0;
 
   if(++blinkCount == 125){
 
-    //stateAdvance();
+    stateAdvance();
     blinkCount = 0;
 
   }
 
-  }*/
+  stateDim();
+
+}
 
 void __interrupt_vec(PORT2_VECTOR) Port_2(){
 

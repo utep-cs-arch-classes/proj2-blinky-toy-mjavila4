@@ -3,7 +3,7 @@
 #include "led.h"
 #include "stateMachines.h"
 
-char switchStateDown, switch2StateDown, switch3StateDown, switch4StateDown;
+char switch1StateDown, switch2StateDown, switch3StateDown, switch4StateDown;
 char switchStateChanged;
 
 static char switchUpdateInterruptSense(){
@@ -30,11 +30,11 @@ void switchInit(){
 void switchInterruptHandler(){
 
   char p2Val = switchUpdateInterruptSense();
-  switchStateDown = (p2Val & SW1) ? 0 : 1;
-  //switch2StateDown = (p2Val & SW2) ? 0 : 1;
-  //switch3StateDown = (p2Val & SW3) ? 0 : 1;
-  //switch4StateDown = (p2Val & SW4) ? 0 : 1;
+  switch1StateDown = (p2Val & SW1) ? 0 : 1;
+  switch2StateDown = (p2Val & SW2) ? 0 : 1;
+  switch3StateDown = (p2Val & SW3) ? 0 : 1;
+  switch4StateDown = (p2Val & SW4) ? 0 : 1;
   switchStateChanged = 1;
-  ledUpdate();
+  //ledUpdate();
   
 }

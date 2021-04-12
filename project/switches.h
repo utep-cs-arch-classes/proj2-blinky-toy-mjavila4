@@ -11,7 +11,7 @@
 void switchInit();
 void switchInterruptHandler();
 
-extern char switchStateDown, switch2StateDown, switch3StateDown, switch4StateDown;
+extern char switch1StateDown, switch2StateDown, switch3StateDown, switch4StateDown;
 extern char switchStateChanged;
 
 #endif

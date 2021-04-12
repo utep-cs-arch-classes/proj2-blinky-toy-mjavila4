@@ -3,6 +3,11 @@
 #include "switches.h"
 #include "stateMachines.h"
 
+unsigned char redOn = 0, greenOn = 0;
+unsigned char ledChanged = 0;
+
+static char redVal[] = {0, LED_RED}, greenVal[] = {0, LED_GREEN};
+
 void ledInit(){
 
   P1DIR |= LEDS;
@@ -13,12 +18,9 @@ void ledInit(){
 
 void ledUpdate(){
 
-  if(switchStateChanged){
-
-    char ledFlags = 0;
+  if(switchStateChanged || ledChanged){
     
-    ledFlags |= switchStateDown ? LED_GREEN : 0;
-    ledFlags |= switchStateDown ? 0 : LED_RED;
+    char ledFlags = redVal[redOn] | greenVal[greenOn];
 
     P1OUT &= (0xff - LEDS) | ledFlags;
     P1OUT |= ledFlags;
@@ -26,5 +28,6 @@ void ledUpdate(){
   }
 
   switchStateChanged = 0;
+  ledChanged = 0;
 
 }
