@@ -3,6 +3,7 @@
 #include "led.h"
 #include "stateMachines.h"
 #include "dimmer.h"
+#include "buzzer.h"
 
 char switch1StateDown, switch2StateDown, switch3StateDown, switch4StateDown;
 char switchStateChanged;
@@ -37,10 +38,20 @@ void switchInterruptHandler(){
   switch4StateDown = (p2Val & SW4) ? 0 : 1;
   switchStateChanged = 1;
   
-  if(switch1StateDown){dimPer = 0;}
-  if(switch2StateDown){dimPer = 1;}
-  if(switch3StateDown){dimPer = 2;}
-  if(switch4StateDown){dimPer = 3;}
-  
-  
+  if(switch1StateDown){
+    dimPer = 0;
+    buzzer_set_period(250);
+  }
+  if(switch2StateDown){
+    dimPer = 1;
+    buzzer_set_period(500);
+  }
+  if(switch3StateDown){
+    dimPer = 2;
+    buzzer_set_period(750);
+  }
+  if(switch4StateDown){
+    dimPer = 3;
+    buzzer_set_period(1000);
+  }
 }
