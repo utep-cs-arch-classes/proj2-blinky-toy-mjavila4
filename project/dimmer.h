@@ -1,7 +1,7 @@
 #ifndef _DIMMER_
 #define _DIMMER_
 
-extern unsigned char dimRed, dimGreen, dimPer;
+extern unsigned char dimRed, dimGreen, dimPer, maxCount, highOut, lowOut;
 
 void stateDim();
 void dimInit();
